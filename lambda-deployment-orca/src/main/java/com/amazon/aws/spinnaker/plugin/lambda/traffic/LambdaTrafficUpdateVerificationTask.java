@@ -71,16 +71,19 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         }
 
         if (!"$WEIGHTED".equals(stage.getContext().get("deploymentStrategy"))) {
-            validateWeights(stage);
+            boolean valid = validateWeights(stage);
+            if (!valid) { formErrorTaskResult(stage, " could not update weights in time"); }
         }
 
         copyContextToOutput(stage);
         return taskComplete(stage);
     }
 
-    private void validateWeights(StageExecution stage) throws InterruptedException {
+    private boolean validateWeights(StageExecution stage) throws InterruptedException {
         AliasRoutingConfiguration weights = null;
+        long startTime = System.currentTimeMillis();
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
+        boolean status = true;
         do {
             System.out.println("while");
             LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, true);
@@ -92,8 +95,11 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
                 weights = opt.orElse(null);
             }
             logger.info("lambdaaaaa: {}",lf);
-
-        } while (null != weights);
+            if ((System.currentTimeMillis()-startTime)<24000) {
+                status = false;
+            }
+        } while (null != weights || (System.currentTimeMillis()-startTime)<24000);
         System.out.println("sali");
+        return status;
     }
 }
