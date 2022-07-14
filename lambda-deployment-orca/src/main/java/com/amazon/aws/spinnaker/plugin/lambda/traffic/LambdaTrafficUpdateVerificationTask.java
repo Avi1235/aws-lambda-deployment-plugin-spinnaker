@@ -23,6 +23,7 @@ import com.amazon.aws.spinnaker.plugin.lambda.utils.LambdaCloudDriverUtils;
 import com.amazon.aws.spinnaker.plugin.lambda.utils.LambdaDefinition;
 import com.amazon.aws.spinnaker.plugin.lambda.verify.model.LambdaCloudDriverTaskResults;
 import com.amazonaws.services.lambda.model.AliasConfiguration;
+import com.amazonaws.services.lambda.model.AliasRoutingConfiguration;
 import com.netflix.spinnaker.orca.api.pipeline.TaskResult;
 import com.netflix.spinnaker.orca.api.pipeline.models.ExecutionStatus;
 import com.netflix.spinnaker.orca.api.pipeline.models.StageExecution;
@@ -78,7 +79,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
     }
 
     private void validateWeights(StageExecution stage) throws InterruptedException {
-        Map<String, Double> weights = null;
+        AliasRoutingConfiguration weights = null;
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
         do {
             System.out.println("while");
@@ -87,12 +88,12 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
 
             if (aliasConfiguration.isPresent()) {
-                Optional<Map<String, Double>> opt = Optional.ofNullable(aliasConfiguration.get().getRoutingConfig().getAdditionalVersionWeights());
+                Optional<AliasRoutingConfiguration> opt = Optional.ofNullable(aliasConfiguration.get().getRoutingConfig());
                 weights = opt.orElse(null);
             }
             logger.info("lambdaaaaa: {}",lf);
 
-        } while ( Objects.requireNonNull(weights).get(inp.getWeightToMinorFunctionVersion()) == null );
+        } while (null == weights);
         System.out.println("sali");
     }
 }
