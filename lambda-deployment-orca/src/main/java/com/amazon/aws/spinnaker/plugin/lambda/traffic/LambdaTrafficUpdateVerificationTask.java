@@ -18,9 +18,11 @@
 package com.amazon.aws.spinnaker.plugin.lambda.traffic;
 
 import com.amazon.aws.spinnaker.plugin.lambda.LambdaStageBaseTask;
+import com.amazon.aws.spinnaker.plugin.lambda.traffic.model.LambdaTrafficUpdateInput;
 import com.amazon.aws.spinnaker.plugin.lambda.utils.LambdaCloudDriverUtils;
+import com.amazon.aws.spinnaker.plugin.lambda.utils.LambdaDefinition;
 import com.amazon.aws.spinnaker.plugin.lambda.verify.model.LambdaCloudDriverTaskResults;
-import com.netflix.spinnaker.orca.api.pipeline.Task;
+import com.amazonaws.services.lambda.model.AliasConfiguration;
 import com.netflix.spinnaker.orca.api.pipeline.TaskResult;
 import com.netflix.spinnaker.orca.api.pipeline.models.ExecutionStatus;
 import com.netflix.spinnaker.orca.api.pipeline.models.StageExecution;
@@ -40,6 +42,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
 
     @Autowired
     CloudDriverConfigurationProperties props;
+
     @Autowired
     private LambdaCloudDriverUtils utils;
 
@@ -64,7 +67,28 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
             return formErrorTaskResult(stage,op.getErrors().getMessage());
         }
 
+        if (!"$WEIGHTED".equals(stage.getContext().get("deploymentStrategy"))) {
+            validateWeights(stage);
+        }
+
         copyContextToOutput(stage);
         return taskComplete(stage);
+    }
+
+    private void validateWeights(StageExecution stage) {
+        Map<String, Double> weights = null;
+        LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
+        do {
+            System.out.println("while");
+            LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, true);
+            Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
+
+            if (aliasConfiguration.isPresent()) {
+                weights = aliasConfiguration.get().getRoutingConfig().getAdditionalVersionWeights();
+            }
+            logger.info("lambdaaaaa: {}",lf);
+
+        } while ( Objects.requireNonNull(weights).get(inp.getWeightToMinorFunctionVersion()) == null );
+        System.out.println("sali");
     }
 }
