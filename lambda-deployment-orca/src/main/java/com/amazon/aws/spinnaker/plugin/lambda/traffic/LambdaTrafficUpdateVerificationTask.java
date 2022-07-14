@@ -95,10 +95,10 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
                 weights = opt.orElse(null);
             }
             logger.info("lambdaaaaa: {}",lf);
-            if ((System.currentTimeMillis()-startTime)<24000) {
+            if ((System.currentTimeMillis()-startTime)<200000) {
                 status = false;
             }
-        } while (null != weights || (System.currentTimeMillis()-startTime)<24000);
+        } while (null != weights && status);
         System.out.println("sali");
         return status;
     }
