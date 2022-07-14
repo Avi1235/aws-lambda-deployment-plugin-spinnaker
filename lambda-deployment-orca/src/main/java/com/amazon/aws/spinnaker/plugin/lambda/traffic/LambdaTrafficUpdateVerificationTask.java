@@ -27,6 +27,7 @@ import com.netflix.spinnaker.orca.api.pipeline.TaskResult;
 import com.netflix.spinnaker.orca.api.pipeline.models.ExecutionStatus;
 import com.netflix.spinnaker.orca.api.pipeline.models.StageExecution;
 import com.netflix.spinnaker.orca.clouddriver.config.CloudDriverConfigurationProperties;
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
     @Autowired
     private LambdaCloudDriverUtils utils;
 
+    @SneakyThrows
     @NotNull
     @Override
     public TaskResult execute(@NotNull StageExecution stage) {
@@ -75,16 +77,18 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         return taskComplete(stage);
     }
 
-    private void validateWeights(StageExecution stage) {
+    private void validateWeights(StageExecution stage) throws InterruptedException {
         Map<String, Double> weights = null;
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
         do {
             System.out.println("while");
             LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, true);
+            Thread.sleep(3000);
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
 
             if (aliasConfiguration.isPresent()) {
-                weights = aliasConfiguration.get().getRoutingConfig().getAdditionalVersionWeights();
+                Optional<Map<String, Double>> opt = Optional.ofNullable(aliasConfiguration.get().getRoutingConfig().getAdditionalVersionWeights());
+                weights = opt.orElse(null);
             }
             logger.info("lambdaaaaa: {}",lf);
 
