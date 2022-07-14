@@ -93,7 +93,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
             }
             logger.info("lambdaaaaa: {}",lf);
 
-        } while (null == weights);
+        } while (null != weights);
         System.out.println("sali");
     }
 }
