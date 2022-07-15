@@ -133,88 +133,106 @@
         "sha512sum": "097acb4e392cf5b6ebda30a07635dd9514326325c1c3c094f8fe31ff24570f36b34395754528389bd999cd89957a79d29699f15c790bc3ef037b64d52f4c1386",
         "preferred": false,
         "compatibility": [],
-        "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.10/aws-lambda-deployment-plugin-spinnaker-1.0.10.zip"
+        "url": "https://github.com/spinnaker-plugins/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.10/aws-lambda-deployment-plugin-spinnaker-1.0.10.zip"
       },
       {
         "version": "1.0.11",
-        "date": "2022-07-05T21:54:46.740401Z",
+        "date": "2022-07-13T15:29:29.001413Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "689a85be8c8522983f47cebbb9e8b7d3dc3e498dd2ac3e7df8e5f4e591bfa7e02a5a262d8d8955f1854b8690f9a36a6a5a9473fd125e92410783131fda2cd942",
+        "sha512sum": "8746432bdb2b9d9649a0221976457baf065e828a3f024399f30db8bc2e73ea75097e1638039102428c550c88fe327765947bdb7c20c3a46dc8095362de7c53d2",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.11/aws-lambda-deployment-plugin-spinnaker-1.0.11.zip"
       },
       {
         "version": "1.0.12",
-        "date": "2022-07-06T16:02:18.992615Z",
+        "date": "2022-07-13T23:34:23.437989Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "97c2fd4082890c50ba0e267099eccb0090d13838ce14dc700ce8d4224f8fe71c72e4d497f6b5369a4502216afde060affa72868cb8d91f1f199d3c64f54ee47c",
+        "sha512sum": "255142067f24dcb6715c448414d904d92360804ae7d3d78efb9e1b4ba5be54553a4b28eb15cbd20b9a236aed0a6b5d3da130defc268def124e075f1b2b0df994",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.12/aws-lambda-deployment-plugin-spinnaker-1.0.12.zip"
       },
       {
         "version": "1.0.13",
-        "date": "2022-07-06T21:49:08.248582Z",
+        "date": "2022-07-14T20:24:51.877437Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "e56ecb24c5e68cd317d603e39efd3ddcdf6f960d7afe9619990a5a94889f22675f95462065ec5d3184e3e612f19ed437f04e604ae4c32c428bb1adef98e2201c",
+        "sha512sum": "d5e33aca49e9f7250781bb743634c3c424e0e2a0b6939bf4ab8a8b3c69a1fed3510dcb6009d18f9274c191aff96bfda22c391624a943391e5c55ff5099699d33",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.13/aws-lambda-deployment-plugin-spinnaker-1.0.13.zip"
       },
       {
         "version": "1.0.14",
-        "date": "2022-07-06T22:21:01.244078Z",
+        "date": "2022-07-14T20:45:56.908347Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "9aee2206b4865ba26768bec4f14fd53b4da34a916bceb9b19caada9622270514fb9ce363590a81dd16f26a754c9beb1c6354d37f19b6255b25f2d23e6f8f40ce",
+        "sha512sum": "a25d311371dbb4bcac6252db49c71bb7c9a9eaa721edf1a56e385496dce4df2296e41369aea91eac82323cab9965faf19e151857a7431c5b07199d4fb457c1e1",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.14/aws-lambda-deployment-plugin-spinnaker-1.0.14.zip"
       },
       {
         "version": "1.0.15",
-        "date": "2022-07-06T22:53:57.700633Z",
+        "date": "2022-07-14T20:52:22.864527Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "47aa503f3a18b1beb6e8d21bf73b49c73b1df7ba252731490f0b46c9b7193490c6a38365ac3cfe7ef2118d68d7a3d98c461ef1a1f785ea5d90c209c3c721f5e8",
+        "sha512sum": "9e573ac014719b3f3b3adfc3c490e5004113236e892c8b23e071184e35b72cd4437616a096d5308dc3dd5cd79c2e9727efb382c3dfb4a5b3e033a6d0c5513cf7",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.15/aws-lambda-deployment-plugin-spinnaker-1.0.15.zip"
       },
       {
         "version": "1.0.16",
-        "date": "2022-07-07T16:49:20.017566Z",
+        "date": "2022-07-14T21:04:55.520525Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "4805a640b871c6ffd9bdc0d7d0debde8ab79f9bf6c66ede248e6024a094249a9699eed24f81fbb528a45a6aea8450d7ad82f5a87a0cd6a6a0c44a5d8db6f5bb8",
+        "sha512sum": "37ad623421bdeb3f96551c72a99c44926ce4b76af914d5e1a9bf5ae04654c2246fdfb8762424c956528597aa1a839683e8cc999b8ceab220cbdb48dbd575e515",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.16/aws-lambda-deployment-plugin-spinnaker-1.0.16.zip"
       },
       {
         "version": "1.0.17",
-        "date": "2022-07-07T17:01:04.177467Z",
+        "date": "2022-07-14T22:17:30.073964Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "7ef03caa3f6d2e1002df71fbc20cc851a569ff152cc11490257978c9f9212a41f45ece040eadb8fd41eb6ab191721fc2a40664730050543f0377c9f086e5a45a",
+        "sha512sum": "3399a6107ab2af36e0e97241a6434eb57c3b95bedd2d1dadad4e654f8dc8cf0abd55e233738cd03967469ed92455a5f5f15fcd3801f4dd75fa76dcdb4f81d89a",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.17/aws-lambda-deployment-plugin-spinnaker-1.0.17.zip"
       },
       {
         "version": "1.0.18",
-        "date": "2022-07-08T01:02:34.107483Z",
+        "date": "2022-07-14T23:14:20.762105Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "9c3c7004132b0eb74e96bea2bf7bda94013671542f565cd9566406c6099ff07f804a4ea088bcfc9929ec1434294cb29a1cc70cdf2db08acf826a9f1b8950453f",
+        "sha512sum": "84736e37aa4473a626981c8067cb1b716d3225a7c86975a0c5b3d256eaf26bdaf6a298e20134576f2fd73ff5589313bd517d8a669491bfc91ee854cb89b3d19c",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.18/aws-lambda-deployment-plugin-spinnaker-1.0.18.zip"
       },
       {
         "version": "1.0.19",
-        "date": "2022-07-08T16:07:31.775591Z",
+        "date": "2022-07-14T23:42:16.299721Z",
         "requires": "orca>=0.0.0,deck>=0.0.0",
-        "sha512sum": "81f73f3c75957b0382d713aaf5cd06f3ff39e2fe61e832758360069caf58ee2f51f2cfb7701fbb0960480f48ee97f114ad871c0b7d13e18ea1c2d71740de80ac",
+        "sha512sum": "e046641c4bcfbfe135a135e6ca4923353ab0a29ba31c09565cc9190bafdf1c1e6bccab01ae3d62be5e109751eadbd371e29551bdfb7600e47e82addc8c5029bb",
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.19/aws-lambda-deployment-plugin-spinnaker-1.0.19.zip"
+      },
+      {
+        "version": "1.0.20",
+        "date": "2022-07-15T15:25:07.312483Z",
+        "requires": "orca>=0.0.0,deck>=0.0.0",
+        "sha512sum": "e256b6766fc41d00f9a76a29e406e66d17625e6ff1ec38949bfdf05117cc6bb63835d2aab797a1638cb6fe152ff58429dd95e5192f30ad523d423920070af93a",
+        "preferred": false,
+        "compatibility": [],
+        "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.20/aws-lambda-deployment-plugin-spinnaker-1.0.20.zip"
+      },
+      {
+        "version": "1.0.22",
+        "date": "2022-07-15T17:20:33.786663Z",
+        "requires": "orca>=0.0.0,deck>=0.0.0",
+        "sha512sum": "07d3d3e15f69920370ee2d19c54ec6530abb5070fd9f5e35b4c0b2eff1d58b1d4e03e08a374e9a7077d9c91fecbbcd03025e08362c50d5666e473232c2cc9241",
+        "preferred": false,
+        "compatibility": [],
+        "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/1.0.22/aws-lambda-deployment-plugin-spinnaker-1.0.22.zip"
       }
     ]
   }

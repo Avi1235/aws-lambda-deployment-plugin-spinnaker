@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -62,10 +61,9 @@ public class LambdaDeleteConcurrencyTask implements LambdaStageBaseTask {
 
         LambdaCloudOperationOutput output;
         if (stage.getType().equals("Aws.LambdaDeploymentStage") && inp.getReservedConcurrentExecutions() == null) {
-            System.out.println("entre al if de deployment");
             output = deleteReservedConcurrency(inp);
-        } else if (stage.getType().equals("Aws.LambdaTrafficRoutingStage") && Optional.ofNullable(inp.getProvisionedConcurrentExecutions()).orElse(0) == 0) {
-            System.out.println("entre al if de traffic");
+        } else if (stage.getType().equals("Aws.LambdaTrafficRoutingStage") && Optional.ofNullable(inp.getProvisionedConcurrentExecutions()).orElse(0) == 0
+                && !"$WEIGHTED".equals(stage.getContext().get("deploymentStrategy"))) {
             output = deleteProvisionedConcurrency(inp);
         } else {
             addToOutput(stage, "LambdaDeleteConcurrencyTask" , "Lambda delete concurrency : nothing to delete");
@@ -76,7 +74,6 @@ public class LambdaDeleteConcurrencyTask implements LambdaStageBaseTask {
     }
 
     private LambdaCloudOperationOutput deleteProvisionedConcurrency(LambdaConcurrencyInput inp) {
-        System.out.println("delete provisioned");
         inp.setQualifier(inp.getAliasName());
         String rawString = utils.asString(inp);
         String endPoint = cloudDriverUrl + CLOUDDRIVER_DELETE_PROVISIONED_CONCURRENCY_PATH;
@@ -88,7 +85,6 @@ public class LambdaDeleteConcurrencyTask implements LambdaStageBaseTask {
     }
 
     private LambdaCloudOperationOutput deleteReservedConcurrency(LambdaConcurrencyInput inp) {
-        System.out.println("delete reserved");
         String rawString = utils.asString(inp);
         String endPoint = cloudDriverUrl + CLOUDDRIVER_DELETE_RESERVED_CONCURRENCY_PATH;
         LambdaCloudDriverResponse respObj = utils.postToCloudDriver(endPoint, rawString);

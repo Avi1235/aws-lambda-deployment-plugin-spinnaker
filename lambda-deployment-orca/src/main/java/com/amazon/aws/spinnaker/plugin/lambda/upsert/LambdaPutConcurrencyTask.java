@@ -35,9 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 public class LambdaPutConcurrencyTask implements LambdaStageBaseTask {
@@ -64,7 +62,8 @@ public class LambdaPutConcurrencyTask implements LambdaStageBaseTask {
         LambdaConcurrencyInput inp = utils.getInput(stage, LambdaConcurrencyInput.class);
         inp.setAppName(stage.getExecution().getApplication());
 
-        if (inp.getReservedConcurrentExecutions() == null && Optional.ofNullable(inp.getProvisionedConcurrentExecutions()).orElse(0) == 0)
+        if ( (inp.getReservedConcurrentExecutions() == null && Optional.ofNullable(inp.getProvisionedConcurrentExecutions()).orElse(0) == 0)
+                || "$WEIGHTED".equals(stage.getContext().get("deploymentStrategy")) )
         {
             addToOutput(stage, "LambdaPutConcurrencyTask" , "Lambda concurrency : nothing to update");
             return taskComplete(stage);
@@ -91,8 +90,6 @@ public class LambdaPutConcurrencyTask implements LambdaStageBaseTask {
     private LambdaCloudOperationOutput putReservedConcurrency( LambdaConcurrencyInput inp) {
         String rawString = utils.asString(inp);
         String endPoint = cloudDriverUrl + CLOUDDRIVER_PUT_RESERVED_CONCURRENCY_PATH;
-        System.out.println("endppoint: " + endPoint);
-        System.out.println("rawString: " + rawString);
         LambdaCloudDriverResponse respObj = utils.postToCloudDriver(endPoint, rawString);
         String url = cloudDriverUrl + respObj.getResourceUri();
         System.out.println("Posted to cloudDriver for putReservedConcurrency: " + url);
