@@ -90,7 +90,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         boolean status = true;
         do {
             System.out.println("while");
-            Thread.sleep(3000);
+            utils.await(3000);
             LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, false);
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
 
