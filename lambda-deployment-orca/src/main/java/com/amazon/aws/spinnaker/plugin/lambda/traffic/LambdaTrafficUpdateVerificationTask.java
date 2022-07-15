@@ -83,15 +83,15 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
     }
 
     private boolean validateWeights(StageExecution stage) throws InterruptedException {
-        Thread.sleep(60000);
+        Thread.sleep(30000);
         AliasRoutingConfiguration weights = null;
         long startTime = System.currentTimeMillis();
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
         boolean status = true;
         do {
             System.out.println("while");
-            LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, false);
             Thread.sleep(3000);
+            LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, false);
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
 
             if (aliasConfiguration.isPresent()) {
@@ -100,6 +100,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
             }
             logger.info("lambdaaaaa: {}",lf);
             if ((System.currentTimeMillis()-startTime)>240000) {
+                logger.warn("validateWeights function is taking to much time");
                 status = false;
             }
         } while (null != weights && status);
