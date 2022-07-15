@@ -72,7 +72,10 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
 
         if (!"$WEIGHTED".equals(stage.getContext().get("deploymentStrategy"))) {
             boolean valid = validateWeights(stage);
-            if (!valid) { formErrorTaskResult(stage, "could not update weights in time"); }
+            if (!valid) {
+                formErrorTaskResult(stage, "Could not update weights in time");
+                return TaskResult.builder(ExecutionStatus.TERMINAL).outputs(stage.getOutputs()).build();
+            }
         }
 
         copyContextToOutput(stage);
@@ -86,7 +89,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         boolean status = true;
         do {
             System.out.println("while");
-            LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, true);
+            LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, false);
             Thread.sleep(3000);
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
 
@@ -95,7 +98,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
                 weights = opt.orElse(null);
             }
             logger.info("lambdaaaaa: {}",lf);
-            if ((System.currentTimeMillis()-startTime)>200000) {
+            if ((System.currentTimeMillis()-startTime)>240000) {
                 status = false;
             }
         } while (null != weights && status);
