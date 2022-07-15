@@ -260,6 +260,15 @@
         "preferred": false,
         "compatibility": [],
         "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/5.0.3/aws-lambda-deployment-plugin-spinnaker-5.0.3.zip"
+      },
+      {
+        "version": "5.0.4",
+        "date": "2022-07-15T21:15:10.007472Z",
+        "requires": "orca>=0.0.0,deck>=0.0.0",
+        "sha512sum": "48893813ffb34c5264bce58aa6373557601ef2f30b6b13fd9fe8479fd9b4f5d62c59cbf6427af626e8632638a9158418242db610471425755c09f9ba523826e4",
+        "preferred": false,
+        "compatibility": [],
+        "url": "https://github.com/Avi1235/aws-lambda-deployment-plugin-spinnaker/releases/download/5.0.4/aws-lambda-deployment-plugin-spinnaker-5.0.4.zip"
       }
     ]
   }
