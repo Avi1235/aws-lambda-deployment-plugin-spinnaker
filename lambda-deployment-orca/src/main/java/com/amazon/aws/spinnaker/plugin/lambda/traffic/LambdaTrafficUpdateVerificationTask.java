@@ -83,7 +83,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
     }
 
     private boolean validateWeights(StageExecution stage) throws InterruptedException {
-        utils.await();
+        utils.await(30000);
         AliasRoutingConfiguration weights = null;
         long startTime = System.currentTimeMillis();
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
