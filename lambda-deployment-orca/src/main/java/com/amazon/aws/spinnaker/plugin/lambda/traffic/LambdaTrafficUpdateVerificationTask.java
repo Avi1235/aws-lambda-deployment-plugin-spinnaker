@@ -66,6 +66,7 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         }
 
         if (op.getStatus().isFailed()) {
+            System.out.println("enter is Failed and died");
             ExecutionStatus status = ExecutionStatus.TERMINAL;
             return formErrorTaskResult(stage,op.getErrors().getMessage());
         }

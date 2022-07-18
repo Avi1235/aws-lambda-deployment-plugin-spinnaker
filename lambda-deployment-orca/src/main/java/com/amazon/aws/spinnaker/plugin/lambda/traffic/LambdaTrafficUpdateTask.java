@@ -68,6 +68,7 @@ public class LambdaTrafficUpdateTask implements LambdaStageBaseTask {
         LambdaBaseStrategyInput input = deploymentStrategy.setupInput(stage);
         result = deploymentStrategy.deploy(input);
         if (!result.isSucceeded()) {
+            System.out.println("isSucceeded() was false so i failed");
             return formErrorTaskResult(stage, result.getErrorMessage());
         }
         final StageExecution tmpStage = stage;
@@ -75,6 +76,7 @@ public class LambdaTrafficUpdateTask implements LambdaStageBaseTask {
             addToTaskContext(tmpStage, (String)x, y);
         });
 
+        System.out.println("i got to the end of LambdaTrafficUpdateTask");
         addCloudOperationToContext(stage, result.getOutput(), "url");
         return taskComplete(stage);
     }

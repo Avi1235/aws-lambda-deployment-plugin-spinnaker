@@ -46,9 +46,6 @@ public class BaseDeploymentStrategy<T extends LambdaBaseStrategyInput> {
         String url = cloudDriverUrl + respObj.getResourceUri();
         logger.debug("Posted to cloudDriver for deployment: " + url);
         LambdaCloudOperationOutput out = LambdaCloudOperationOutput.builder().resourceId(respObj.getId()).url(url).build();
-        out.getOutputMap().forEach((k, v) -> {
-            System.out.println("key: " + k + " - value: " + v);
-        });
         return out;
     }
 
