@@ -88,8 +88,8 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         long startTime = System.currentTimeMillis();
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
         boolean status = true;
+        System.out.println("while Starting");
         do {
-            System.out.println("while");
             Thread.sleep(3000);
             LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, false);
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
@@ -98,13 +98,12 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
                 Optional<AliasRoutingConfiguration> opt = Optional.ofNullable(aliasConfiguration.get().getRoutingConfig());
                 weights = opt.orElse(null);
             }
-            logger.info("lambdaaaaa: {}",lf);
             if ((System.currentTimeMillis()-startTime)>240000) {
                 logger.warn("validateWeights function is taking to much time");
                 status = false;
             }
         } while (null != weights && status);
-        System.out.println("sali");
+        System.out.println("while Finish");
         return status;
     }
 }
