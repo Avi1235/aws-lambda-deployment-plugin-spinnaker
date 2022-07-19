@@ -26,15 +26,14 @@ import com.netflix.spinnaker.orca.api.pipeline.TaskResult;
 import com.netflix.spinnaker.orca.api.pipeline.models.ExecutionStatus;
 import com.netflix.spinnaker.orca.api.pipeline.models.StageExecution;
 import com.netflix.spinnaker.orca.clouddriver.config.CloudDriverConfigurationProperties;
-import lombok.SneakyThrows;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.pf4j.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Component
@@ -52,7 +51,6 @@ public class LambdaPutConcurrencyTask implements LambdaStageBaseTask {
     private LambdaCloudDriverUtils utils;
     private  String cloudDriverUrl;
 
-    @SneakyThrows
     @NotNull
     @Override
     public TaskResult execute(@NotNull StageExecution stage) {

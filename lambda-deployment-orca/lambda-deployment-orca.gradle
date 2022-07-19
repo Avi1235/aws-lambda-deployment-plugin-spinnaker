@@ -30,15 +30,12 @@ dependencies {
   compileOnly (group: 'com.netflix.spinnaker.orca', name: 'orca-core', version: "${orcaVersion}")
   compileOnly (group: 'com.netflix.spinnaker.kork', name: 'kork-artifacts', version: "${korkVersion}")
   compileOnly (group: 'com.netflix.spinnaker.kork', name: 'kork-plugins-spring-api', version: "${korkVersion}")
-  implementation("com.amazonaws:aws-java-sdk:1.11.877")
-  implementation("org.apache.commons:commons-lang3:3.8.1")
-  implementation("com.github.ben-manes.caffeine:guava:2.8.5")
-  implementation("com.netflix.awsobjectmapper:awsobjectmapper:1.11.877")
-  implementation("org.apache.httpcomponents:httpclient:4.5.9")
-  implementation("org.apache.httpcomponents:httpcore:4.4.11")
-  implementation("com.squareup.okhttp3:okhttp:4.2.2")
-  implementation("com.squareup.okhttp3:okhttp-apache:3.13.1")
+
+  implementation(enforcedPlatform("com.netflix.spinnaker.kork:kork-bom:$korkVersion"))
+  implementation("com.netflix.awsobjectmapper:awsobjectmapper:1.11.802")
+
   annotationProcessor("org.pf4j:pf4j:3.2.0")
+
   testImplementation (group: 'com.netflix.spinnaker.orca', name: 'orca-api', version: "${orcaVersion}")
   testImplementation (group: 'com.netflix.spinnaker.orca', name: 'orca-api-tck', version: "${orcaVersion}")
   testImplementation (group: 'com.netflix.spinnaker.orca', name: 'orca-queue', version: "${orcaVersion}")
@@ -57,22 +54,6 @@ dependencies {
   annotationProcessor ("org.projectlombok:lombok:1.18.12")
   testCompile ("org.projectlombok:lombok:1.18.12")
   testAnnotationProcessor("org.projectlombok:lombok:1.18.12")
-
-  testImplementation("com.fasterxml.jackson.core:jackson-core") {
-    version {
-      strictly '2.11.2'
-    }
-  }
-  testImplementation("com.fasterxml.jackson.core:jackson-annotations") {
-    version {
-      strictly '2.11.2'
-    }
-  }
-  testImplementation("com.fasterxml.jackson.core:jackson-databind") {
-    version {
-      strictly '2.11.2'
-    }
-  }
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
   testImplementation("org.junit.platform:junit-platform-commons:1.4.0")
