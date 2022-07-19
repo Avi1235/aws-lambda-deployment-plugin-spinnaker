@@ -31,15 +31,15 @@ dependencies {
   compileOnly (group: 'io.spinnaker.kork', name: 'kork-artifacts', version: "${korkVersion}")
   compileOnly (group: 'io.spinnaker.kork', name: 'kork-plugins-spring-api', version: "${korkVersion}")
 
-  implementation(enforcedPlatform("io.spinnaker.kork:kork-bom:$korkVersion") {
-    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
-    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-annotations'
-    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
-
-  } )
+  implementation(enforcedPlatform("io.spinnaker.kork:kork-bom:$korkVersion"))
   implementation("com.netflix.awsobjectmapper:awsobjectmapper")
 
   annotationProcessor("org.pf4j:pf4j:3.2.0")
+
+  compileOnly platform("io.spinnaker.kork:kork-bom:$korkVersion")
+  compileOnly ("org.projectlombok:lombok")
+  annotationProcessor platform("io.spinnaker.kork:kork-bom:$korkVersion")
+  annotationProcessor ("org.projectlombok:lombok")
 
   testImplementation (group: 'com.netflix.spinnaker.orca', name: 'orca-api', version: "${orcaVersion}")
   testImplementation (group: 'com.netflix.spinnaker.orca', name: 'orca-api-tck', version: "${orcaVersion}")
