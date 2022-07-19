@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import javax.annotation.Nonnull;
 import java.util.*;
 
 @Component
@@ -49,9 +49,9 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
     private LambdaCloudDriverUtils utils;
 
     @SneakyThrows
-    @NotNull
+    @Nonnull
     @Override
-    public TaskResult execute(@NotNull StageExecution stage) {
+    public TaskResult execute(@Nonnull StageExecution stage) {
         prepareTask(stage);
         Map<String, Object> stageContext = stage.getContext();
         String url = (String)stageContext.get("url");
