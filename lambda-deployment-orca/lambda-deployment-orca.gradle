@@ -31,12 +31,7 @@ dependencies {
   compileOnly (group: 'io.spinnaker.kork', name: 'kork-artifacts', version: "${korkVersion}")
   compileOnly (group: 'io.spinnaker.kork', name: 'kork-plugins-spring-api', version: "${korkVersion}")
 
-  implementation(enforcedPlatform("io.spinnaker.kork:kork-bom:$korkVersion") {
-    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
-    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-annotations'
-    exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
-
-  } )
+  implementation(enforcedPlatform("io.spinnaker.kork:kork-bom:$korkVersion"))
   implementation("com.netflix.awsobjectmapper:awsobjectmapper")
 
   annotationProcessor("org.pf4j:pf4j:3.2.0")
@@ -55,36 +50,17 @@ dependencies {
   testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '2.19.0'
   testCompile (group: 'com.netflix.spinnaker.orca', name: 'orca-clouddriver', version: "${orcaVersion}")
 
-//  compileOnly ("org.projectlombok:lombok:1.18.12")
-//  annotationProcessor ("org.projectlombok:lombok:1.18.12")
-//  testCompile ("org.projectlombok:lombok:1.18.12")
-//  testAnnotationProcessor("org.projectlombok:lombok:1.18.12")
-
   compileOnly platform("io.spinnaker.kork:kork-bom:$korkVersion")
   annotationProcessor platform("io.spinnaker.kork:kork-bom:$korkVersion")
   testCompile platform("io.spinnaker.kork:kork-bom:$korkVersion")
   testAnnotationProcessor platform("io.spinnaker.kork:kork-bom:$korkVersion")
+  testImplementation("io.spinnaker.kork:kork-test:$korkVersion")
+  testImplementation("io.spinnaker.kork:kork-web:$korkVersion")
 
   compileOnly "org.projectlombok:lombok"
   annotationProcessor "org.projectlombok:lombok"
   testCompile "org.projectlombok:lombok"
   testAnnotationProcessor "org.projectlombok:lombok"
-
-  testImplementation("com.fasterxml.jackson.core:jackson-core") {
-    version {
-      strictly '2.11.2'
-    }
-  }
-  testImplementation("com.fasterxml.jackson.core:jackson-annotations") {
-    version {
-      strictly '2.11.2'
-    }
-  }
-  testImplementation("com.fasterxml.jackson.core:jackson-databind") {
-    version {
-      strictly '2.11.2'
-    }
-  }
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
   testImplementation("org.junit.platform:junit-platform-commons:1.4.0")
