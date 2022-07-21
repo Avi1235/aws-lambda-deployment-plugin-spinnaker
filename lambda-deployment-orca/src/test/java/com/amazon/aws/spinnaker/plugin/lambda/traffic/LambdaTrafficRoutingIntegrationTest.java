@@ -36,7 +36,7 @@ public class LambdaTrafficRoutingIntegrationTest extends OrcaPluginsFixture {
     @Test
     public void resolveToCorrectTypeTest() {
         StageDefinitionBuilder stageDefinitionBuilder = this.stageResolver.getStageDefinitionBuilder(
-            LambdaTrafficRoutingStage.class.getSimpleName(), "Aws.LambdaTrafficRoutingStage");
+                LambdaTrafficRoutingStage.class.getSimpleName(), "Aws.LambdaTrafficRoutingStage");
 
         assertTrue(stageDefinitionBuilder.aliases().contains("Aws.LambdaTrafficRoutingStage"), "Expected stageDefinitionBuilder to contain Aws.LambdaTrafficRoutingStage");
         assertEquals(stageDefinitionBuilder.getType(), "lambdaTrafficRouting" , "Expected stageDefinitionBuilder to be of type lambdaTrafficRouting");
@@ -57,7 +57,7 @@ public class LambdaTrafficRoutingIntegrationTest extends OrcaPluginsFixture {
                         "account", "aws-account"
                 ))));
         final MvcResult postResults = this.mockMvc.perform(MockMvcRequestBuilders
-                .post("/orchestrate")
+                        .post("/orchestrate")
                         .content(content)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -66,7 +66,7 @@ public class LambdaTrafficRoutingIntegrationTest extends OrcaPluginsFixture {
 
         Map map = mapper.readValue(response.getContentAsString(), Map.class);
         final MvcResult getResults = mockMvc.perform(MockMvcRequestBuilders
-                .get((String) map.get("ref")))
+                        .get((String) map.get("ref")))
                 .andReturn();
 
         Execution execution = mapper.readValue(getResults.getResponse().getContentAsString(), Execution.class);
@@ -80,15 +80,16 @@ public class LambdaTrafficRoutingIntegrationTest extends OrcaPluginsFixture {
     }
 
 }
-    @Data
-    class Execution {
-        String status;
-        List<Stage> stages;
-    }
 
-    @Data
-    class Stage {
-        String status;
-        LambdaTrafficUpdateInput context;
-        String type;
-    }
+@Data
+class Execution {
+    String status;
+    List<Stage> stages;
+}
+
+@Data
+class Stage {
+    String status;
+    LambdaTrafficUpdateInput context;
+    String type;
+}

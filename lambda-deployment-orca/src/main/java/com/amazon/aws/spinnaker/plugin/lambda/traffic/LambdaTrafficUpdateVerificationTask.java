@@ -28,7 +28,6 @@ import com.netflix.spinnaker.orca.api.pipeline.TaskResult;
 import com.netflix.spinnaker.orca.api.pipeline.models.ExecutionStatus;
 import com.netflix.spinnaker.orca.api.pipeline.models.StageExecution;
 import com.netflix.spinnaker.orca.clouddriver.config.CloudDriverConfigurationProperties;
-import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask {
@@ -48,7 +48,6 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
     @Autowired
     private LambdaCloudDriverUtils utils;
 
-    @SneakyThrows
     @Nonnull
     @Override
     public TaskResult execute(@Nonnull StageExecution stage) {
@@ -72,8 +71,8 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         }
 
         if (!"$WEIGHTED".equals(stage.getContext().get("deploymentStrategy"))) {
-            boolean valid = validateWeights(stage);
-            if (!valid) {
+            boolean inValid = validateWeights(stage);
+            if (inValid) {
                 formErrorTaskResult(stage, "Could not update weights in time");
                 return TaskResult.builder(ExecutionStatus.TERMINAL).outputs(stage.getOutputs()).build();
             }
@@ -83,14 +82,13 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
         return taskComplete(stage);
     }
 
-    private boolean validateWeights(StageExecution stage) throws InterruptedException {
+    private boolean validateWeights(StageExecution stage) {
         utils.await(30000);
         AliasRoutingConfiguration weights = null;
         long startTime = System.currentTimeMillis();
         LambdaTrafficUpdateInput inp = utils.getInput(stage, LambdaTrafficUpdateInput.class);
-        boolean status = true;
+        boolean status = false;
         do {
-            System.out.println("while");
             utils.await(3000);
             LambdaDefinition lf = utils.retrieveLambdaFromCache(stage, false);
             Optional<AliasConfiguration> aliasConfiguration = lf.getAliasConfigurations().stream().filter(al -> al.getName().equals(inp.getAliasName())).findFirst();
@@ -99,13 +97,11 @@ public class LambdaTrafficUpdateVerificationTask implements LambdaStageBaseTask 
                 Optional<AliasRoutingConfiguration> opt = Optional.ofNullable(aliasConfiguration.get().getRoutingConfig());
                 weights = opt.orElse(null);
             }
-            logger.info("lambdaaaaa: {}",lf);
             if ((System.currentTimeMillis()-startTime)>240000) {
-                logger.warn("validateWeights function is taking to much time");
-                status = false;
+                logger.warn("validateWeights function is taking too much time: " + TimeUnit.MILLISECONDS.toMinutes((System.currentTimeMillis()-startTime)) + " minutes plus" );
+                status = true;
             }
-        } while (null != weights && status);
-        System.out.println("sali");
+        } while (null != weights && !status);
         return status;
     }
 }
