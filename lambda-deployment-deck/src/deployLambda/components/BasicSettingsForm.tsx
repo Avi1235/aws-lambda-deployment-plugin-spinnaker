@@ -173,6 +173,12 @@ export function BasicSettingsForm( props: IFormikStageConfigInjectedProps ) {
         help={<HelpField id="aws.function.publish" />}
         input={props => <CheckboxInput {...props} />}
       />
+      {props.runtime === "java11" && props.publish && <FormikFormField
+        name="snapstart"
+        label="Snapstart"
+        help={<HelpField id="aws.function.snapstart" />}
+        input={props => <CheckboxInput {...props} />}
+      />}
 
     </div>
   );
