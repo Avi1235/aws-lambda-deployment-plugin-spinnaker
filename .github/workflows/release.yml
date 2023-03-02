@@ -108,7 +108,7 @@ jobs:
       - name: Commit plugins.json
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: poking_around
+          branch: snapstart-impl
           push_options: '--force'
           commit_message: Update plugins.json
           commit_user_name: Release Bot
